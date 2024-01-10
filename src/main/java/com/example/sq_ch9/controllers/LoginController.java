@@ -31,11 +31,11 @@ public class LoginController {
         loginProcessor.setPassword(password);
         boolean loggedIn = loginProcessor.login();
 
-        model.addAttribute(
-                "message",
-                loggedIn ? "You are now logged in." : "Login failed!"
-        );
+        if (loggedIn) {
+            return "redirect:/main";
+        }
 
+        model.addAttribute("message", "Login failed!");
         return "login.html";
     }
 }
