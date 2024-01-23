@@ -34,4 +34,15 @@ class LoginControllerUnitTests {
 
         verify(model).addAttribute("message", "You are now logged in.");
     }
+
+    @Test
+    public void loginPostLoginFailsTest() {
+        given(loginProcessor.login()).willReturn(false);
+
+        String result = loginController.loginPost("username", "password", model);
+
+        assertEquals("login.html", result);
+
+        verify(model).addAttribute("message", "Login failed!");
+    }
 }
